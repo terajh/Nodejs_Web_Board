@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
     //     //console.log(filelist);
     //     res.render('index', { title: filelist });
     // });
-    res.render('index', { title: req.list, description: "" });
+    res.render('index', { title: req.list, description: "Hello to board" });
 });
 router.get('/create', (req, res, next) => {
     res.render('create', { title: req.list });
