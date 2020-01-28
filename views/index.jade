@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  div.container
+    header 
+      h1 header
+    section.content
+      nav
+        ul 
+          -for (var i=0;i<title.length;i++)
+            li: a(href="../data/#{title[i]}") #{title[i]}
+            
+          
+      main 
+        p #{description}
+      aside 
+        p: a(href="/") home
+        p: a(href="./create") create
+        -if(update!=undefined)
+          p: a(href="../update/#{update}") update
+          
+    footer
+      
+

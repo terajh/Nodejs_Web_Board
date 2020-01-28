@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  div.container
+    header 
+      h1 header
+    section.content
+      nav
+        ul
+          -for (var i=0;i<title.length;i++)
+            li: a(href="../data/#{title[i]}") #{title[i]}
+      main
+        form(action="/create_process", method="post")
+            p(style="text-align:center;") new_title
+                <br><br>
+                input(type="text",placeholder="new_title",
+                style="width:470px;", name="new_title")
+            p(style="text-align:center;") new_description
+                <br><br>
+                textarea(id="create_text", placeholder="new_description",
+                style="width:470px; height:230px", name="new_description")
+                <br>
+                input(type="submit", value="submit")
+      aside 
+        p: a(href="/") home
+        p: a(href="/create") create
+        
+    footer
+      
+
