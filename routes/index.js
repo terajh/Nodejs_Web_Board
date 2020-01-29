@@ -34,7 +34,12 @@ router.post('/create_process', (req, res, next) => {
 router.get('/data/:pageId', (req, res, next) => {
     var id = req.params.pageId;
     fs.readFile(`data/${id}`, 'utf-8', (err, new_description) => {
-        res.render('index', { title: req.list, description: new_description, update: id })
+        res.render('index', {
+            title: req.list,
+            description: new_description,
+            update: id,
+            delete_: id
+        })
     })
 })
 router.get('/update/:pageId', (req, res, next) => {
@@ -50,7 +55,14 @@ router.post('/update_process', (req, res, next) => {
             res.redirect(`data/${new_title}`);
         })
     })
-
+})
+router.post('/delete', (req, res) => {
+    var body = req.body;
+    var delId = body.delId;
+    console.log(delId);
+    fs.unlink(`data/${delId}`, (err) => {
+        res.redirect('/');
+    })
 })
 
 module.exports = router;

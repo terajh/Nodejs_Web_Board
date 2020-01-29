@@ -16,6 +16,10 @@ block content
         p: a(href="./create") create
         -if(update!=undefined)
           p: a(href="../update/#{update}") update
+        -if(delete_!=undefined)
+          form(action="../delete" method="post")
+            input(type="hidden" name="delId", value="#{delete_}")
+            input(type="submit" value="delete")
           
     footer
       
