@@ -6,6 +6,10 @@ var logger = require('morgan');
 var compression = require('compression');
 var indexRouter = require('./routes/index.js');
 var usersRouter = require('./routes/users.js');
+var authRouter = require('./routes/auth.js');
+var parseurl = require('parseurl')
+var session = require('express-session')
+var FileStore = require('session-file-store')(session)
 var fs = require('fs');
 
 var app = express();
@@ -25,9 +29,17 @@ app.get('*', function(req, res, next) {
         next();
     });
 });
+
+app.use(session({
+    secret: 'asdfasdfasdf@#asdfa',
+    resave: false,
+    saveUninitialized: true,
+    store: new FileStore()
+}));
 app.use(compression());
 
 app.use('/', indexRouter);
+app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

@@ -5,49 +5,55 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.container>header {
+    background-color: red;
+}
+
+.container>header>a {
+    position: relative;
+    right: 50%;
+    margin-bottom: 6px;
+    background-color: khaki;
+    border: 1px solid blueviolet;
+}
+
+
+}
 a {
     color: #00B7FF;
 }
-
 .container {
     display: flex;
     flex-direction: column;
     height: 400px;
 }
-
 header {
     text-align: center;
     border-bottom: 1px solid gray;
     padding-left: 20px;
 }
-
 footer {
     border-top: 1px solid gray;
     padding: 20px;
     text-align: center;
 }
-
 .content {
     display: flex;
 }
-
 .content nav {
     padding-right: 20px;
     padding-left: 5px;
     height: 600px;
 }
-
 .content aside {
     text-align: center;
 }
-
 nav,
 aside {
     flex-basis: 150px;
     width: 15%;
     height: 600px;
 }
-
 main {
     width: 80%;
     border-left: 3px solid gray;
@@ -56,7 +62,6 @@ main {
     padding-bottom: 0px;
     height: 600px;
 }
-
 #create_text {
     height: 100px;
 }
