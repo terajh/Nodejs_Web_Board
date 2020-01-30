@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var compression = require('compression');
 var fs = require('fs');
+var auth = require('../lib/auth');
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(express.static(path.join(__dirname, 'public')));
@@ -12,40 +13,71 @@ router.use(express.static(path.join(__dirname, 'data')));
 /* GET home page. */
 
 router.get('/', function(req, res) {
-    // fs.readdir('./data', function(error, filelist) {
-    //     //console.log(filelist);
-    //     res.render('index', { title: filelist });
-    // });
-    res.render('index', { title: req.list, description: "Hello to board" });
+    var AuthStatusUI = auth.statusUI(req, res);
+    res.render('index', {
+        title: req.list,
+        description: "Hello to board",
+        AuthStatusUI: AuthStatusUI
+    });
 });
 router.get('/create', (req, res, next) => {
-    res.render('create', { title: req.list });
+    var AuthStatusUI = auth.statusUI(req, res);
+    if (!auth.IsOwner(req, res)) {
+        res.redirect('/');
+        return false;
+    }
+    res.render('create', {
+        title: req.list,
+        AuthStatusUI: AuthStatusUI
+    });
 });
 
 router.post('/create_process', (req, res, next) => {
     var post = req.body;
     var title = post.new_title;
     var description = post.new_description;
+    if (!auth.IsOwner(req, res)) {
+        res.redirect('/');
+        return false;
+    }
     fs.writeFile(`data/${title}`, description, "utf8", (err) => {
         if (err) throw err;
-        res.redirect('/');
+        res.redirect(`data/${title}`);
     })
 });
+
 router.get('/data/:pageId', (req, res, next) => {
     var id = req.params.pageId;
+    var AuthStatusUI = auth.statusUI(req, res);
     fs.readFile(`data/${id}`, 'utf-8', (err, new_description) => {
         res.render('index', {
             title: req.list,
             description: new_description,
             update: id,
-            delete_: id
+            delete_: id,
+            AuthStatusUI: AuthStatusUI
+
         })
     })
 })
 router.get('/update/:pageId', (req, res, next) => {
-    res.render('update', { title: req.list, update: req.params.pageId });
+    var AuthStatusUI = auth.statusUI(req, res);
+    if (!auth.IsOwner(req, res)) {
+        res.redirect('/');
+        return false;
+    }
+
+    res.render('update', {
+        title: req.list,
+        update: req.params.pageId,
+        AuthStatusUI: AuthStatusUI
+    });
 })
 router.post('/update_process', (req, res, next) => {
+    if (!auth.IsOwner(req, res)) {
+        res.redirect('/');
+        return false;
+    }
     var body = req.body;
     var old_title = body.old_title;
     var new_title = body.new_title;
@@ -57,6 +89,10 @@ router.post('/update_process', (req, res, next) => {
     })
 })
 router.post('/delete', (req, res) => {
+    if (!auth.IsOwner(req, res)) {
+        res.redirect('/');
+        return false;
+    }
     var body = req.body;
     var delId = body.delId;
     console.log(delId);

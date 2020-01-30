@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var compression = require('compression');
 var fs = require('fs');
-
+var auth = require('../lib/auth');
 var parseurl = require('parseurl')
 var session = require('express-session')
 var FileStore = require('session-file-store')(session)
@@ -15,13 +15,19 @@ var authData = {
     nickname: 'terajoo'
 }
 
+
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(express.static(path.join(__dirname, 'public')));
 router.use(express.static(path.join(__dirname, 'data')));
 // 정적 페이지 경로 미리 설정
 
 router.get('/login', (req, res) => {
-    res.render('login', { title: req.list, description: "Hello to board" });
+    var AuthStatusUI = auth.statusUI(req, res);
+    res.render('login', {
+        title: req.list,
+        description: "Hello to board",
+        AuthStatusUI: AuthStatusUI
+    });
 });
 
 router.post('/login_process', (req, res) => {
@@ -34,10 +40,17 @@ router.post('/login_process', (req, res) => {
         req.session.is_login = true;
         req.session.nickname = authData.nickname;
         console.log(req.session);
-        res.send('Welcome!');
+        res.redirect('/');
     } else {
-        res.send("Who?")
+
+        res.redirect('/');
     }
+})
+
+router.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        res.redirect('/');
+    })
 })
 
 module.exports = router;

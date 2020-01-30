@@ -1,10 +1,13 @@
 extends layout
 
+
 block content
   div.container
+    
+
     header 
       h1 BOARD v1.0.0
-      a(href="../auth/login") login
+      a(href="../auth/#{AuthStatusUI}") #{AuthStatusUI}
     section.content
       nav
         ul 
@@ -14,7 +17,7 @@ block content
         p #{description}
       aside 
         p: a(href="/") home
-        p: a(href="./create") create
+        p: a(href="../create") create
         -if(update!=undefined)
           p: a(href="../update/#{update}") update
         -if(delete_!=undefined)
