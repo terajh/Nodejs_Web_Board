@@ -7,3 +7,8 @@
 - delete board function
 - login by local 
 - login by passport
+
+### GOALS
+
+- designed used by Bootstrap open soursces : X
+- crolling functions by python modules : X
