@@ -18,36 +18,27 @@ router.use(express.static(path.join(__dirname, 'data')));
 // 정적 페이지 경로 미리 설정
 
 router.get('/login', (req, res) => {
-    var AuthStatusUI = Auth.statusUI(req, res);
-
-    res.render('login', {
-        title: req.list,
-        description: "Hello to board",
-        AuthStatusUI: AuthStatusUI
-    });
-});
-/*
-router.post('/login_process', (req, res) => {
-    var body = req.body;
-    var email = body.email;
-    var pwd = body.pwd;
-    console.log(email);
-    console.log(pwd);
-    if (email === authData.email && pwd === authData.password) {
-        req.session.is_login = true;
-        req.session.nickname = authData.nickname;
-        console.log(req.session);
-        res.redirect('/');
+    if (Auth.IsOwner(req, res)) {
+        res.render('login', {
+            title: req.list,
+            description: "Hello to board",
+            AuthStatusUI: "login"
+        });
     } else {
-
-        res.redirect('/');
+        res.render('login', {
+            title: req.list,
+            description: "Hello to board",
+            AuthStatusUI: "logout"
+        });
     }
-})
-*/
+
+});
+
 router.get('/logout', (req, res) => {
-    req.session.destroy((err) => {
+    req.logout();
+    req.session.save(function(err) {
         res.redirect('/');
-    })
+    });
 })
 
 module.exports = router;

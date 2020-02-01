@@ -11,6 +11,7 @@ var parseurl = require('parseurl')
 var session = require('express-session')
 var FileStore = require('session-file-store')(session)
 var fs = require('fs');
+var auth = require('./lib/auth.js');
 
 var authData = {
     email: 'terajh@gmail.com',
@@ -62,8 +63,9 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
     console.log('deserializeUSer', id);
-    done(null, authData); // authData가 req의 user 에 전달되도록 
-    //약속되어있다.
+    done(null, authData);
+    // authData가 req의 user 에 전달되도록 
+    // 약속되어있다.
 });
 // 페이지에 리로드 할 때마다 로그인했는지 세션값을 확인하는
 // 역할을 한다.

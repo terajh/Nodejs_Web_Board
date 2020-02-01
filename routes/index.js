@@ -13,14 +13,15 @@ router.use(express.static(path.join(__dirname, 'data')));
 /* GET home page. */
 
 router.get('/', function(req, res) {
-    console.log('/', req.session.passport);
-    var AuthStatusUI = auth.statusUI(req, res);
+    console.log('########', req.user);
+    var AuthStatusUI = auth.statusUI(req, res)
     res.render('index', {
         title: req.list,
         description: "Hello to board",
         AuthStatusUI: AuthStatusUI
     });
 });
+
 router.get('/create', (req, res, next) => {
     var AuthStatusUI = auth.statusUI(req, res);
     if (!auth.IsOwner(req, res)) {
