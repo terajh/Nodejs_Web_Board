@@ -2,9 +2,11 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var path = require('path');
-var compression = require('compression');
 var fs = require('fs');
 var auth = require('../lib/auth');
+var compression = require('compression');
+
+router.use(compression());
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(express.static(path.join(__dirname, 'public')));
@@ -13,7 +15,6 @@ router.use(express.static(path.join(__dirname, 'data')));
 /* GET home page. */
 
 router.get('/', function(req, res) {
-    console.log('########', req.user);
     var AuthStatusUI = auth.statusUI(req, res)
     res.render('index', {
         title: req.list,
@@ -97,7 +98,6 @@ router.post('/delete', (req, res) => {
     }
     var body = req.body;
     var delId = body.delId;
-    console.log(delId);
     fs.unlink(`data/${delId}`, (err) => {
         res.redirect('/');
     })

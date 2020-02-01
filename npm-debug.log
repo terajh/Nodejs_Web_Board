@@ -1,0 +1,124 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'connect-flash' ]
+2 info using npm@3.5.2
+3 info using node@v8.10.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 silly fetchPackageMetaData connect-flash
+8 silly fetchNamedPackageData connect-flash
+9 silly mapToRegistry name connect-flash
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.org/
+12 silly mapToRegistry uri https://registry.npmjs.org/connect-flash
+13 verbose request uri https://registry.npmjs.org/connect-flash
+14 verbose request no auth needed
+15 info attempt registry request try #1 at 8:41:39 PM
+16 verbose request id ca4cc64e3f6bab72
+17 verbose etag W/"9d6bf54d2fded8f4bc30321137e7ca37"
+18 verbose lastModified Fri, 03 Aug 2018 00:32:06 GMT
+19 http request GET https://registry.npmjs.org/connect-flash
+20 http 304 https://registry.npmjs.org/connect-flash
+21 verbose headers { date: 'Sat, 01 Feb 2020 11:41:40 GMT',
+21 verbose headers   connection: 'keep-alive',
+21 verbose headers   'set-cookie':
+21 verbose headers    [ '__cfduid=db4535c3300f0e8cef20c6d0d843a3e1c1580557300; expires=Mon, 02-Mar-20 11:41:40 GMT; path=/; domain=.npmjs.org; HttpOnly; SameSite=Lax' ],
+21 verbose headers   'cf-ray': '55e3a856ab39e9d8-ICN',
+21 verbose headers   age: '4339',
+21 verbose headers   'cache-control': 'public, max-age=300',
+21 verbose headers   etag: '"9d6bf54d2fded8f4bc30321137e7ca37"',
+21 verbose headers   'last-modified': 'Fri, 03 Aug 2018 00:32:06 GMT',
+21 verbose headers   vary: 'Accept-Encoding',
+21 verbose headers   'cf-cache-status': 'HIT',
+21 verbose headers   'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+21 verbose headers   server: 'cloudflare' }
+22 silly get cb [ 304,
+22 silly get   { date: 'Sat, 01 Feb 2020 11:41:40 GMT',
+22 silly get     connection: 'keep-alive',
+22 silly get     'set-cookie':
+22 silly get      [ '__cfduid=db4535c3300f0e8cef20c6d0d843a3e1c1580557300; expires=Mon, 02-Mar-20 11:41:40 GMT; path=/; domain=.npmjs.org; HttpOnly; SameSite=Lax' ],
+22 silly get     'cf-ray': '55e3a856ab39e9d8-ICN',
+22 silly get     age: '4339',
+22 silly get     'cache-control': 'public, max-age=300',
+22 silly get     etag: '"9d6bf54d2fded8f4bc30321137e7ca37"',
+22 silly get     'last-modified': 'Fri, 03 Aug 2018 00:32:06 GMT',
+22 silly get     vary: 'Accept-Encoding',
+22 silly get     'cf-cache-status': 'HIT',
+22 silly get     'expect-ct': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+22 silly get     server: 'cloudflare' } ]
+23 verbose etag https://registry.npmjs.org/connect-flash from cache
+24 verbose get saving connect-flash to /home/terajh/.npm/registry.npmjs.org/connect-flash/.cache.json
+25 silly install normalizeTree
+26 silly loadCurrentTree Finishing
+27 silly loadIdealTree Starting
+28 silly install loadIdealTree
+29 silly cloneCurrentTree Starting
+30 silly install cloneCurrentTreeToIdealTree
+31 silly cloneCurrentTree Finishing
+32 silly loadShrinkwrap Starting
+33 silly install loadShrinkwrap
+34 silly loadShrinkwrap Finishing
+35 silly loadAllDepsIntoIdealTree Starting
+36 silly install loadAllDepsIntoIdealTree
+37 silly resolveWithNewModule connect-flash@0.1.1 checking installable status
+38 silly cache add args [ 'connect-flash', null ]
+39 verbose cache add spec connect-flash
+40 silly cache add parsed spec Result {
+40 silly cache add   raw: 'connect-flash',
+40 silly cache add   scope: null,
+40 silly cache add   name: 'connect-flash',
+40 silly cache add   rawSpec: '',
+40 silly cache add   spec: 'latest',
+40 silly cache add   type: 'tag' }
+41 silly addNamed connect-flash@latest
+42 verbose addNamed "latest" is being treated as a dist-tag for connect-flash
+43 info addNameTag [ 'connect-flash', 'latest' ]
+44 silly mapToRegistry name connect-flash
+45 silly mapToRegistry using default registry
+46 silly mapToRegistry registry https://registry.npmjs.org/
+47 silly mapToRegistry uri https://registry.npmjs.org/connect-flash
+48 verbose addNameTag registry:https://registry.npmjs.org/connect-flash not in flight; fetching
+49 verbose get https://registry.npmjs.org/connect-flash not expired, no request
+50 silly addNameTag next cb for connect-flash with tag latest
+51 silly addNamed connect-flash@0.1.1
+52 verbose addNamed "0.1.1" is a plain semver version for connect-flash
+53 silly cache afterAdd connect-flash@0.1.1
+54 verbose afterAdd /home/terajh/.npm/connect-flash/0.1.1/package/package.json not in flight; writing
+55 verbose afterAdd /home/terajh/.npm/connect-flash/0.1.1/package/package.json written
+56 silly loadAllDepsIntoIdealTree Finishing
+57 silly idealTree:prePrune lib
+57 silly idealTree:prePrune └── connect-flash@0.1.1
+58 silly loadIdealTree Finishing
+59 silly currentTree lib
+60 silly idealTree lib
+60 silly idealTree └── connect-flash@0.1.1
+61 silly generateActionsToTake Starting
+62 silly install generateActionsToTake
+63 warn checkPermissions Missing write access to /usr/local/lib/node_modules
+64 silly rollbackFailedOptional Starting
+65 silly rollbackFailedOptional Finishing
+66 silly runTopLevelLifecycles Starting
+67 silly runTopLevelLifecycles Finishing
+68 silly install printInstalled
+69 verbose stack Error: EACCES: permission denied, access '/usr/local/lib/node_modules'
+70 verbose cwd /mnt/c/Users/박주현/Desktop/jh/dev/nodejs/board
+71 error Linux 4.4.0-18362-Microsoft
+72 error argv "/usr/bin/node" "/usr/bin/npm" "install" "-g" "connect-flash"
+73 error node v8.10.0
+74 error npm  v3.5.2
+75 error path /usr/local/lib/node_modules
+76 error code EACCES
+77 error errno -13
+78 error syscall access
+79 error Error: EACCES: permission denied, access '/usr/local/lib/node_modules'
+79 error  { Error: EACCES: permission denied, access '/usr/local/lib/node_modules'
+79 error   errno: -13,
+79 error   code: 'EACCES',
+79 error   syscall: 'access',
+79 error   path: '/usr/local/lib/node_modules' }
+80 error Please try running this command again as root/Administrator.
+81 verbose exit [ -13, true ]

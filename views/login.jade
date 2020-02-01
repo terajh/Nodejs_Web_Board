@@ -11,6 +11,7 @@ block content
           -for (var i=0;i<title.length;i++)
             li: a(href="../data/#{title[i]}") #{title[i]}
       main
+        div(style="color:red") #{description}
         form(action="login_process", method="post")
             p(style="text-align:left;") [ email ]
                 <br><br>
@@ -22,6 +23,7 @@ block content
                  name="pwd")
                 <br><br>
                 input(type="submit", value="Log in")
+            
       aside 
         p: a(href="/") home
         p: a(href="/create") create
