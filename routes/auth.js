@@ -8,12 +8,8 @@ var auth = require('../lib/auth');
 var parseurl = require('parseurl')
 var session = require('express-session')
 var FileStore = require('session-file-store')(session)
+var Auth = require('../lib/auth.js');
 
-var authData = {
-    email: 'terajh@gmail.com',
-    password: '123123',
-    nickname: 'terajoo'
-}
 
 
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -22,14 +18,15 @@ router.use(express.static(path.join(__dirname, 'data')));
 // 정적 페이지 경로 미리 설정
 
 router.get('/login', (req, res) => {
-    var AuthStatusUI = auth.statusUI(req, res);
+    var AuthStatusUI = Auth.statusUI(req, res);
+
     res.render('login', {
         title: req.list,
         description: "Hello to board",
         AuthStatusUI: AuthStatusUI
     });
 });
-
+/*
 router.post('/login_process', (req, res) => {
     var body = req.body;
     var email = body.email;
@@ -46,7 +43,7 @@ router.post('/login_process', (req, res) => {
         res.redirect('/');
     }
 })
-
+*/
 router.get('/logout', (req, res) => {
     req.session.destroy((err) => {
         res.redirect('/');

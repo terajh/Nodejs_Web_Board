@@ -13,6 +13,7 @@ router.use(express.static(path.join(__dirname, 'data')));
 /* GET home page. */
 
 router.get('/', function(req, res) {
+    console.log('/', req.session.passport);
     var AuthStatusUI = auth.statusUI(req, res);
     res.render('index', {
         title: req.list,
