@@ -1,8 +1,33 @@
 doctype html
-html
+html(lang="en")
   head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous")
+
   body
-    script(type='text/javascript' src='../public/javascripts/script.js')
     block content
+    
+    script(type='text/javascript' src='../public/javascripts/bootstrap.min.js')
+    script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous")
+    
+    footer(style="background-color:#000000; color:#ffffff")
+      div(class="container")
+        <br>
+        div(class="row")
+          div(class="col-sm-2" style="text-align: center; font-color:white")
+            h5 Compyright &copy; 2020
+            h5 terajh
+          div(class="col-sm-1" style="text-align: font-color:white")
+          div(class="col-sm-6" style="text-align: font-color:white")
+            h5 페이지 소개
+            h8 현재 페이지는 학습용 페이지입니다.
+
+          div(class="col-sm-1" style="text-align:center; font-color:white") 
+          div(class="col-sm-2" style=" font-color:white") 
+            h4 by terajoo

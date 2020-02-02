@@ -23,6 +23,14 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/board', (req, res, next) => {
+    var AuthStatusUI = auth.statusUI(req, res);
+    res.render('board', {
+        title: req.list,
+        AuthStatusUI: AuthStatusUI
+    })
+
+})
 router.get('/create', (req, res, next) => {
     var AuthStatusUI = auth.statusUI(req, res);
     if (!auth.IsOwner(req, res)) {
@@ -53,7 +61,7 @@ router.get('/data/:pageId', (req, res, next) => {
     var id = req.params.pageId;
     var AuthStatusUI = auth.statusUI(req, res);
     fs.readFile(`data/${id}`, 'utf-8', (err, new_description) => {
-        res.render('index', {
+        res.render('data', {
             title: req.list,
             description: new_description,
             update: id,

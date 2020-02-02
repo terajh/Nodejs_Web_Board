@@ -22,24 +22,24 @@ module.exports = function(passport) {
     router.post('/login_process',
         passport.authenticate('local', { // local 전략을 이용해 인증하겠다는 의미.
             successRedirect: '/', // 성공시
-            failureRedirect: './login', // 실패시
+            failureRedirect: './', // 실패시
             failureFlash: true
         }));
 
-    router.get('/login', (req, res) => {
-        var fmsg = req.flash();
-        var feedback = '';
-        var AuthStatusUI = Auth.statusUI(req, res);
-        if (fmsg.error) {
-            feedback = fmsg.error[0];
-        }
-        console.log(feedback);
-        res.render('login', {
-            title: req.list,
-            description: feedback,
-            AuthStatusUI: AuthStatusUI
-        });
-    });
+    // router.get('/login', (req, res) => {
+    //     var fmsg = req.flash();
+    //     var feedback = '';
+    //     var AuthStatusUI = Auth.statusUI(req, res);
+    //     if (fmsg.error) {
+    //         feedback = fmsg.error[0];
+    //     }
+    //     console.log(feedback);
+    //     res.render('login', {
+    //         title: req.list,
+    //         description: feedback,
+    //         AuthStatusUI: AuthStatusUI
+    //     });
+    // });
 
     router.get('/logout', (req, res) => {
         req.logout();
