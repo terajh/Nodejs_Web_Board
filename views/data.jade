@@ -99,7 +99,7 @@ block content
     table(class="table table-bordered")
         tr
             td(style="text-align:center;"): -if(delete_!=undefined)
-                    form(action="../delete" method="post")
+                    form(action="/delete" method="post")
                         input(type="hidden" name="delId", value="#{delete_}")
                         input(type="submit" value="delete")
             td(style="text-align:center;"): -if(update!=undefined)

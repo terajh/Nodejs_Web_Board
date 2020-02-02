@@ -100,7 +100,10 @@ router.post('/update_process', (req, res, next) => {
     })
 })
 router.post('/delete', (req, res) => {
+    console.log('######');
+    res.send('<script type="text/javascript">alert("err");</script>');
     if (!auth.IsOwner(req, res)) {
+        res.send('<script type="text/javascript">alert("err");</script>');
         res.redirect('/');
         return false;
     }
