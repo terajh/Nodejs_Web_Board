@@ -99,12 +99,9 @@ router.post('/update_process', (req, res, next) => {
         })
     })
 })
-router.post('/delete', (req, res) => {
-    console.log('######');
-    res.send('<script type="text/javascript">alert("err");</script>');
-    if (!auth.IsOwner(req, res)) {
-        res.send('<script type="text/javascript">alert("err");</script>');
-        res.redirect('/');
+router.post('/delete', (req, res, next) => {
+    if (!auth.IsOwner(req, res, next)) {
+        res.status(401).send('<script type="text/javascript">alert("err"); location.href="/";</script>');
         return false;
     }
     var body = req.body;
@@ -112,6 +109,25 @@ router.post('/delete', (req, res) => {
     fs.unlink(`data/${delId}`, (err) => {
         res.redirect('/');
     })
+})
+
+router.post('/find', (req, res) => {
+    var body = req.body;
+    var find_title = body.find_title;
+    var AuthStatusUI = auth.statusUI(req, res);
+    console.log('########');
+    fs.readFile(`data/${find_title}`, 'utf-8', function(error, description) {
+        if (error) {
+            res.send('<script type="text/javascript">alert("unexisted file"); location.href="/";</script>')
+            return false;
+        }
+        res.render('find', {
+            title: find_title,
+            AuthStatusUI: AuthStatusUI
+        })
+    });
+
+
 })
 
 module.exports = router;
