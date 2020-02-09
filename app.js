@@ -25,12 +25,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 // 정적인 파일을 pubic 에 놓는다고 정의
-app.get('*', function(req, res, next) {
-    fs.readdir('./data', function(error, filelist) {
-        req.list = filelist;
-        next();
-    });
-}); // filelist를 가져오는 함수, filelist 변수를 초기화한다고 생각하자.
+// app.get('*', function(req, res, next) {
+//     fs.readdir('./data', function(error, filelist) {
+//         req.list = filelist;
+//         next();
+//     });
+// }); // filelist를 가져오는 함수, filelist 변수를 초기화한다고 생각하자.
+
 
 
 app.use(session({
@@ -41,7 +42,6 @@ app.use(session({
 }));
 
 var passport = require('./lib/passport.js')(app); // refactoring
-
 var indexRouter = require('./routes/index.js');
 var usersRouter = require('./routes/users.js');
 var authRouter = require('./routes/auth.js')(passport);

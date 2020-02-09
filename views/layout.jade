@@ -3,14 +3,95 @@ html(lang="en")
   head
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
-    title= title
+    title= 'TERAJOO\'s blog'
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous")
 
   body
-    
+    nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
+      a(class="navbar-brand" href="/"): h3 TERAJOO
+      button(class="navbar-toggler" type="button"
+      data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" 
+      aria-label="Toggle navigation") 
+        span(class="navbar-toggler-icon")
+
+      div(class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarNavAltMarkup")
+        ul(class="navbar-nav mr-auto")
+          li(class="nav-item active")
+            a(class="nav-link" href="/") Home
+              span(class="sr-only") (current)   
+          li(class="nav-item")  
+            a(class="nav-link" href="/board") Board
+          -if(AuthStatusUI!="login")
+            li(class="nav-item")  
+              a(class="nav-link" href="/users") Users
+      div(class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarNavAltMarkup")
+        ul(class="navbar-nav ml-auto")
+          li(class="nav-item dropdown")
+            -if(AuthStatusUI==="login")
+              a(class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+              aria-haspopup="false" aria-expanded="true") #{AuthStatusUI}
+              div(class="dropdown-menu" aria-labelledby="navbarDropdown")
+                a(class="dropdown-item btn btn-primary" data-toggle="modal" data-target="#loginmodal" data-whatever="@LOGIN") login
+                a(class="dropdown-item btn btn-primary" data-toggle="modal" data-target="#registermodal" data-whatever="@REGISTER") register
+                div(class="dropdown-divider")
+                a(class="dropdown-item" href="#") something to help
+            -else 
+              a(class="nav-link" href="/auth/logout" role="button"
+              aria-haspopup="false" aria-expanded="true") #{AuthStatusUI}
+          hr
+          form(class="form-inline" action="/find" method="post")
+            input(class="form-control mr-sm-2" type="search" placeholder="Search" name="find_title")
+            button(class="btn btn-outline-success my-2 my-sm-0" type="submit") search  
+
+      //- 로그인 페이지
+      div(class="modal fade" id="loginmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+        div(class="modal-dialog" role="document")
+          div(class="modal-content")
+              div(class="modal-header")
+                h5(class="modal-title" id="exampleModalLabel") LOGIN PAGE
+                button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                  span(aria-hidden="true") &times;
+              div(class="modal-body")
+                form(action="/auth/login_process" method="post")
+                  div(class="form-group")
+                    label(for="recipient-name" class="col-form-label") ID:
+                    input(type="text" class="form-control" id="recipient-name" name="username")    
+                  div(class="form-group")
+                    label(for="message-text" class="col-form-label") Password:
+                    input(type="password" class="form-control" id="message-text" name="password")
+                  div(class="modal-footer")
+                    button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+                    input(type="submit" value="Login" class="btn btn-primary")
+      //- 회원가입 페이지
+      div(class="modal fade" id="registermodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+        div(class="modal-dialog" role="document")
+          div(class="modal-content")
+              div(class="modal-header")
+                h5(class="modal-title" id="exampleModalLabel") REGISTER PAGE
+                button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                  span(aria-hidden="true") &times;
+              div(class="modal-body")
+                form(action="/auth/register_process" method="post")
+                  div(class="form-group")
+                    label(for="recipient-name" class="col-form-label") ID:
+                    input(type="text" class="form-control" id="recipient-name" name="username")    
+                  div(class="form-group")
+                    label(for="message-text" class="col-form-label") Password:
+                    input(type="password" class="form-control" id="message-text" name="password")
+                  div(class="form-group")
+                    label(for="message-text" class="col-form-label") Nickname:
+                    input(type="text" class="form-control" id="message-text" name="nickname")
+                  div(class="modal-footer")
+                    button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+                    input(type="submit" value="register" class="btn btn-primary")
+
+
+    hr(class="my-4") 
     block content
+
     script(type='text/javascript' src='/javascripts/bootstrap.min.js')
     script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")
     script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")
