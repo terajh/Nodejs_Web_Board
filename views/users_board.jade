@@ -1,0 +1,54 @@
+extends layout
+
+
+block content
+  div(class="container")
+    -if(usr=="")
+
+    -if(usr!="")
+        form(action="/users/board_process", method="post")
+            div(class="form-group")
+                label(for="formGroupExampleInput") #{usr}
+                input(type="text", class="form-control",name="description", id="formGroupExampleInput" placeholder="")
+                input(type="submit")
+
+    table(class="table")
+      thead 
+        tr
+          th Number
+          th Nickname
+          th Comment
+          th Created
+      tbody
+        -for(var i=0;i<title.length;i++)
+          tr
+            td #{title[i].username}
+            td #{title[i].description}
+            td #{title[i].created}
+            td
+                form(action="/users/delete_comment", method="post")
+                    input(type="hidden", name="id", value=`${title[i].id}`)
+                    button(type="submit" class="btn btn-secondary btn-sm") delete
+  hr  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+      
+
