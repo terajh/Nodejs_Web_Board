@@ -1,0 +1,67 @@
+window.onload = function() {
+
+	var bodyTag = document.getElementsByTagName("body")[0];  
+	var form = document.createElement("form");              
+	
+	var rdviewerUrl = document.createElement("input"); 
+	var mrdpath = document.createElement("input");      
+	var param = document.createElement("input");     
+	var title = document.createElement("input");       
+
+	rdviewerUrl.type = "hidden";
+	mrdpath.type = "hidden";
+	param.type = "hidden";
+	title.type = "hidden";
+		
+	rdviewerUrl.id = "rdviewerUrl";
+	mrdpath.id = "mrdpath";
+	param.id = "param";
+	title.id = "title";
+	
+	form.appendChild(rdviewerUrl);
+	form.appendChild(mrdpath);
+	form.appendChild(param);
+	form.appendChild(title);
+	
+	bodyTag.appendChild(form);	
+}
+
+
+function openRdPopup(url, mrdpath, param, title) {	
+
+	var rdviewerUrl = url + "RDServer/rdviewer.jsp";
+        
+	
+	document.getElementById('rdviewerUrl').value = rdviewerUrl;   
+	document.getElementById('mrdpath').value = mrdpath;           
+	document.getElementById('param').value = param;
+	document.getElementById('title').value = title;
+	
+	//var openwin = window.open("http://202.30.0.50:8090/com/RdPopup.jsp", title,  "menubar=no, width=800, height=600, resizable=0");
+	var openwin = window.open("RdPopup.html", "",  "menubar=no, width=800, height=600, resizable=0");
+	openwin.focus();	
+}
+
+function openRdPopupDka(url, mrdpath, param, title) {	
+    var rdviewerUrl = "http://haksa2.ajou.ac.kr/uni/com/rdviewer_dka.jsp";
+
+	document.getElementById('rdviewerUrl').value = rdviewerUrl;   
+	document.getElementById('mrdpath').value = mrdpath;           
+	document.getElementById('param').value = param;
+	document.getElementById('title').value = title;
+
+	var openwin = window.open("RdPopup.html", "",  "menubar=no, width=800, height=600, resizable=0");
+	openwin.focus();
+}
+
+function openRdPopupDkaWeb(url, mrdpath, param, title) {	
+    var rdviewerUrl = "http://haksa2.ajou.ac.kr/uni/com/rdviewer_dkaweb_https.jsp";
+
+	document.getElementById('rdviewerUrl').value = rdviewerUrl;   
+	document.getElementById('mrdpath').value = mrdpath;           
+	document.getElementById('param').value = param;
+	document.getElementById('title').value = title;
+
+	var openwin = window.open("RdPopup.html", "",  "menubar=no, width=800, height=600, resizable=1");
+	openwin.focus();
+}
