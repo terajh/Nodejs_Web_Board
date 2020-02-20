@@ -15,7 +15,7 @@ block content
     table(class="table")
       thead 
         tr
-          th username
+          th name
           th comment
           th created
           th delete
@@ -23,8 +23,8 @@ block content
         -for(var i=0;i<title.length;i++)
           tr
             td #{title[i].username}
-            td #{title[i].description}
-            td #{title[i].created}
+            td #{title[i].comment}
+            td #{title[i]['date_format(created,\'%m-%d %T\')']}
             td
                 form(action="/users/delete_comment", method="post")
                     input(type="hidden", name="id", value=`${title[i].id}`)

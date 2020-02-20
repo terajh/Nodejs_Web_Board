@@ -21,18 +21,18 @@ router.get('/', function(req, res, next) {
 });
 router.get('/board', (req, res, next) => {
     var AuthStatusui = auth.statusUI(req, res);
-    db.query(`SELECT username,comment,created FROM userboard`, (error, results) => {
+    db.query(`SELECT id,username,comment,date_format(created,'%m-%d %T') FROM userboard`, (error, results) => {
         if (error) throw error;
-	console.log(results);
+	    console.log(results);
         if (auth.IsOwner(req, res)) {
             res.render('users_board', {
-                AuthStatusui: AuthStatusui,
+                AuthStatusUI: AuthStatusui,
                 usr: req.user.nickname,
                 title: results
             });
         } else {
             res.render('users_board', {
-                AuthStatusui: AuthStatusui,
+                AuthStatusUI: AuthStatusui,
                 title: results,
                 usr: ""
             });
@@ -57,7 +57,7 @@ router.post('/delete_comment', (req, res, next) => {
     // console.log('process');
     db.query(`DELETE FROM userboard WHERE id=${delId}`, (error, result) => {
         if (error) throw error;
-        res.redirect('/');
+        res.redirect('./board');
     });
 })
 

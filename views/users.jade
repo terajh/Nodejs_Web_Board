@@ -6,14 +6,12 @@ block content
     table(class="table")
       thead 
         tr
-          th Number
           th email
           th created time
           th nickname
       tbody
         -for(var i=0;i<title.length;i++)
           tr
-            td #{i+1}
             td #{title[i].email}
             td #{title[i].created}
             td #{title[i].nickname}
