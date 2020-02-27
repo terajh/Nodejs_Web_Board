@@ -29,9 +29,9 @@ const socketServer = io(httpServer);
 
 
 socketServer.on('connection', (socket) => {
-    socket.on('chat message',(msg)=>{
-        console.log(socket.handshake.address);
-        socketServer.emit('chat message',msg);
+    socket.on('chat message',(option)=>{
+        console.log(option.name + "님이 입장하셨습니다.");
+        socketServer.emit('chat message',(option));
     });
     socket.on('disconnect',()=>{
         console.log('user disconnected');
