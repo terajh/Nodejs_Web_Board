@@ -16,7 +16,7 @@ router.use(express.static(path.join(__dirname, 'public')));
 
 router.get('/', function(req, res) {
     var AuthStatusUI = auth.statusUI(req, res)
-    console.log(req.user.nickname);
+    //console.log(req.user.nickname);
     db.query(`SELECT * FROM topic`, (error, topic) => {
         res.render('index', {
             title: topic,

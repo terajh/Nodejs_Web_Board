@@ -132,7 +132,7 @@ html(lang="en")
         });
         socket.on('chat message',(msg)=>{
           //- console.log($('#nickname').val())
-          $('.myMsg').append($('<span class="msg">').text($('#nickname').val()));
+          $('.myMsg').append($('<span class="name">').text($('#nickname').val()+' : '));
           //- $('.myMsg').append($('<span>').text(#{user}));
           $('.myMsg').append($('<span class="msg">').text(msg));
           $('.myMsg').append($('<br>'));
