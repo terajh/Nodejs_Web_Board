@@ -135,6 +135,7 @@ html(lang="en")
           //- $('.myMsg').append($('<span>').text(#{user}));
           $('.myMsg').append($('<span class="msg">').text(msg));
           $('.myMsg').append($('<br>'));
+          $('#chatLog').scroll()[0].scrollTop=$('#chatLog').scroll()[0].scrollHeight;
         });
     });
         
