@@ -1,14 +1,20 @@
 doctype html
 html(lang="en")
+  
   head
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     title= 'TERAJOO\'s blog'
+    
     link(rel='stylesheet', href='/stylesheets/chatstyle.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous")
-    
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+    script(type='text/javascript' src="/socket.io/socket.io.js")
+    script(src="http://code.jquery.com/jquery-latest.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js")
+    //- script(type='text/javascript' src="/javascripts/script.js")
   body
     nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
       a(class="navbar-brand" href="/"): h3 TERAJOO
@@ -113,29 +119,67 @@ html(lang="en")
           div(class="col-sm-2" style=" font-color:white") 
             h4 by terajoo
             input(type="hidden" id="nickname" value="#{AuthStatusUI}")
-
-  script(type='text/javascript' src="/socket.io/socket.io.js")
-  script(type='text/javascript' src="/javascripts/script.js")
-  script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous")
-  script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")
-  script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous")
-  //- script(type='text/javascript' src='/javascripts/script.js')
-  
-  
+    
   script(type='text/javascript').
     $(()=>{
-        const socket = io('');
-        $('#chatForm').submit(()=>{
-            var option = {msg:$('#message').val(), name:$('#nickname').val()};
-            socket.emit('chat message',option);
-            $('#message').val('');
-            return false;
+      const socket = io('');
+      var roomId=1;
+      var myId=$('#nickname').val();
+      console.log(myId);
+
+      //- 클릭시 이벤트기반출력
+      $('#roomSelect').on('click','div', (event)=>{
+        var click_roomId = $(event.target).data('id');
+        if(roomId!=click_roomId){
+          roomId=click_roomId;
+        }
+        console.log($(event.target).data('id'));
+        $(event.target).parent().children().removeClass("active");
+        $(event.target).addClass("active");
+
+        $('#chatHeader').html(`${$(event.target).html()}`);
+        socket.emit('join room', {
+          roomId:roomId,
+          name:$('#nickname').val()
         });
-        socket.on('chat message',(option)=>{
-          $('.myMsg').append($('<span class="name">').text(option.name+' : '));
-          $('.myMsg').append($('<span class="msg">').text(option.msg));
-          $('.myMsg').append($('<br>'));
-          $('#chatLog').scroll()[0].scrollTop=$('#chatLog').scroll()[0].scrollHeight;
-        });
+      });
+      
+      $('#chatForm').submit(()=>{
+          var option = {
+              msg:$('#message').val(),
+              name:$('#nickname').val()
+          };
+          socket.emit('chat message',option);
+          $('#message').val('');
+          return false;
+      });
+      socket.on('chat message',(option)=>{
+        //- alert('joined room');
+        var name = option.name+' : ';
+        $('#chatLog').append(`<div class="myMsg msgEl"><span>${name}</span><span class="msg">${option.msg}</span></div>`)
+        //- $('#chatLog').append($('<br>'));
+        $('#chatLog').scroll()[0].scrollTop=$('#chatLog').scroll()[0].scrollHeight;
+      });
+
+      socket.on('update user', function (userlist) {
+          let html = "";
+          for(var key in userlist){
+              if (key === myId) {
+                  html += `<div class="memberEl">${key} (me)</div>`
+              } else {
+                  html += `<div class="memberEl">${key}</div>`
+              }
+          }
+          $('#memberSelect').html(html);
+          socket.emit('joined room','terajoo');
+      });
+
+      socket.on('lefted room', function (data) {
+          $('#chatLog').append(`<div class="notice"><strong>${data.name}</strong> lefted the room${data.roomId-1}</div>`)
+      });
+      socket.on('joined room', function (data) {
+         $('#chatLog').html('');
+         $('#chatLog').append(`<div class="notice"><strong>${data.name}</strong> joined the room[${data.roomId-1}]</div>`)
+      });
     });
         

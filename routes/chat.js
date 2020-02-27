@@ -37,7 +37,7 @@ router.get('/', function(req, res) {
     else{
         // console.log()
         alert('Need Login');
-        res.send("<script> window.alert('Need Login'); window.location.href='http://localhost:3000/' </script>");
+        res.send("<script> window.alert('Need Login'); window.location.href='http://localhost:9000/' </script>");
     }
 });
 

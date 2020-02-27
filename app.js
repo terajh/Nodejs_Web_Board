@@ -20,26 +20,46 @@ app.use(session({
 })); // 세션이용); // app server session 사용
 
 const http = require('http').createServer(app);
-const io = require('socket.io');
+const io = require('socket.io').listen(http);
 
 const httpServer = http.listen(9000,(req,res)=>{
     console.log('socket server : 9000');
 }); // socket 서버 열기
-const socketServer = io(httpServer);
+// const socketServer = io.listen(httpServer);
 
+let userlist={'terajoo':1};
 
-socketServer.on('connection', (socket) => {
+io.sockets.on('connection', (socket) => {
+    socket.join('room1');
     socket.on('chat message',(option)=>{
-        console.log(option.name + "님이 입장하셨습니다.");
-        socketServer.emit('chat message',(option));
+        // console.log(userlist[option.name]+"##########");
+        io.sockets.in('room'+userlist[option.name]).emit('chat message',(option));
     });
     socket.on('disconnect',()=>{
         console.log('user disconnected');
+    });
+    socket.on('join room', function (data) {
+        
+        if(userlist[data.name] != undefined){
+            var option = {'name':data.name,'roomId':userlist[data.name]};
+            io.sockets.in('room'+userlist[data.name]).emit('lefted room',option);
+            console.log(data.name+' is lefted room'+userlist[data.name]);
+            socket.leave('room'+userlist[data.name]);
+        }
+        userlist[data.name]=data.roomId;
+        // console.log(data.name + "님이 room"+ userlist[data.name] + "에 입장하셨습니다.");
+        socket.join('room' + userlist[data.name]);
+        io.sockets.in('room'+data.roomId).emit('update user',userlist);
+    });
+    socket.on('joined room',(myId)=>{
+        console.log(myId+' is joined room'+userlist[myId]);
+        var data = {'name':myId,'roomId':userlist[myId]};
+        io.sockets.in('room'+userlist[myId]).emit('joined room',(data));
     })
 });
 
 httpServer.on('request', (req,res)=>{
-    console.log('requests gone');
+    // console.log('requests gone');
 })
 
 // view engine setup
