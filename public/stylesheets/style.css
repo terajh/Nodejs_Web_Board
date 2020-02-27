@@ -93,6 +93,7 @@ a {
     background-image: url('/images/space.jpg');
     background-size: cover;
     text-shadow: black 0.2em 0.2em 0.2em;
+    height:80%;
     color: whitesmoke;
 }
 

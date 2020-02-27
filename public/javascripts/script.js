@@ -1,6 +1,5 @@
-if (response == "unauthenticated") alert("You should login first");
+if(response=="unauthenticated") {
 
-
-window.onload = function() {
-    alert("hihihi");
+    alert("You should login first!");
+    location.href="./";
 }

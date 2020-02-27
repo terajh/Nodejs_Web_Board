@@ -1,0 +1,37 @@
+extends layout
+
+block content
+   
+        
+    div(id="container")
+        //- nav
+        //-     span(id="nav-header") chat
+        div(id="contentCover")
+            div(id="roomWrap")
+                div(id="roomList")
+                    div(id="roomHeader") 채팅 방 목록
+                    div(id="roomSelect")
+                        div(class="roomEl active" data-id="1") ROOM
+                        div(class="roomEl" data-id="2") ROOM[1]
+                        div(class="roomEl" data-id="3") ROOM[2]
+                        div(class="roomEl" data-id="4") ROOM[3]
+                    
+            div(id="chatWrap") 
+                div(id="chatHeader") Everyone
+                div(id="chatLog") 
+                    div(class="anotherMsg")
+                    div(class="myMsg")
+                        
+                    
+                form(id="chatForm")
+                    input(autocomplete="off" size="30" id="message" placeholder=" 메시지를 입력하세요")
+                    inpurt(type="hidden" id="nickname" value="#{user}")
+                    button(id="send") send
+
+            div(id="memberWrap") 
+                div(id="memberList") 
+                    div(id="memberHeader") 사람
+                    div(id="memberSelect") 
+    hr
+
+                

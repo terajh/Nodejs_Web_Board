@@ -7,10 +7,12 @@ block content
 
     -if(usr!="")
         form(action="/users/board_process", method="post")
-            div(class="form-group")
-                label(for="formGroupExampleInput") #{usr}
-                input(type="text", class="form-control",name="description", id="formGroupExampleInput" placeholder="")
-                input(type="submit")
+            table(class="form-group")
+                tr: label(for="formGroupExampleInput") #{usr}
+                tr
+                  td: input(type="text", style="height:100px; width:900px; align:center;" class="form-control",name="description", id="formGroupExampleInput" placeholder="")
+                tr
+                  td: input(type="submit")
 
     table(class="table")
       thead 

@@ -19,6 +19,7 @@ router.get('/', function(req, res, next) {
         });
     });
 });
+
 router.get('/board', (req, res, next) => {
     var AuthStatusui = auth.statusUI(req, res);
     db.query(`SELECT id,username,comment,date_format(created,'%m-%d %T') FROM userboard`, (error, results) => {
@@ -43,7 +44,8 @@ router.get('/board', (req, res, next) => {
 router.post('/board_process', (req, res, next) => {
     var post = req.body;
     var description = post.description;
-    var AuthStatusui = auth.statusUI(req, res);
+    var AuthStatusUI = auth.statusUI(req, res);
+    console.log(req.user.nickname);
     console.log('create comment');
     db.query(`INSERT INTO userboard (username,comment,created) VALUES('${req.user.nickname}', '${description}',NOW())`, (error, userboard) => {
         res.redirect('/users/board')
