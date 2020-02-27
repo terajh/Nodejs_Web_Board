@@ -6,14 +6,22 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
+    "alert-node": "^2.1.4",
     "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-session": "^1.17.0",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "jquery": "^3.4.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "session-file-store": "^1.4.0",
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

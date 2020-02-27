@@ -22,8 +22,8 @@ app.use(session({
 const http = require('http').createServer(app);
 const io = require('socket.io');
 
-const httpServer = http.listen(3000,(req,res)=>{
-    console.log('socket server : 3000');
+const httpServer = http.listen(9000,(req,res)=>{
+    console.log('socket server : 9000');
 }); // socket 서버 열기
 const socketServer = io(httpServer);
 
