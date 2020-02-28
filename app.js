@@ -27,7 +27,7 @@ const httpServer = http.listen(9000,(req,res)=>{
 }); // socket 서버 열기
 // const socketServer = io.listen(httpServer);
 
-let userlist={'terajoo':1};
+let userlist={};
 
 io.sockets.on('connection', (socket) => {
     socket.join('room1');
@@ -47,7 +47,7 @@ io.sockets.on('connection', (socket) => {
             socket.leave('room'+userlist[data.name]);
         }
         userlist[data.name]=data.roomId;
-        // console.log(data.name + "님이 room"+ userlist[data.name] + "에 입장하셨습니다.");
+        console.log(data.name + "님이 room"+ userlist[data.name] + "에 입장하셨습니다.");
         socket.join('room' + userlist[data.name]);
         io.sockets.in('room'+data.roomId).emit('update user',userlist);
     });

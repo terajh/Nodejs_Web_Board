@@ -120,6 +120,8 @@ html(lang="en")
             h4 by terajoo
             input(type="hidden" id="nickname" value="#{AuthStatusUI}")
     
+
+
   script(type='text/javascript').
     $(()=>{
       const socket = io('');
@@ -140,7 +142,7 @@ html(lang="en")
         $('#chatHeader').html(`${$(event.target).html()}`);
         socket.emit('join room', {
           roomId:roomId,
-          name:$('#nickname').val()
+          name:myId
         });
       });
       
@@ -171,7 +173,7 @@ html(lang="en")
               }
           }
           $('#memberSelect').html(html);
-          socket.emit('joined room','terajoo');
+          socket.emit('joined room',myId);
       });
 
       socket.on('lefted room', function (data) {

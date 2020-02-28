@@ -24,7 +24,7 @@ router.use(express.static(path.join(__dirname, '../node_modules')));
 router.get('/', function(req, res) {
     // console.log(req);
     var AuthStatusUI = auth.statusUI(req, res)
-    // console.log(req.user);
+    // console.log(AuthStatusUI);
     var user="";
     if(auth.IsOwner(req,res)){
         user=req.user.nickname;
