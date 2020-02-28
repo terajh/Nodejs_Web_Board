@@ -4,13 +4,16 @@ html(lang="en")
   head
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
-    title= 'TERAJOO\'s blog'
     
     link(rel='stylesheet', href='/stylesheets/chatstyle.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js")
+
+    title= 'TERAJOO\'s blog'
     //- link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
-       //- script(type='text/javascript' src="/javascripts/script.js")
+    //- script(type='text/javascript' src="/javascripts/script.js")
   body
     nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
       a(class="navbar-brand" href="/"): h3 TERAJOO
@@ -99,9 +102,7 @@ html(lang="en")
     hr(class="my-4") 
     script(type='text/javascript' src="/socket.io/socket.io.js")
     script(src="http://code.jquery.com/jquery-latest.min.js")
-    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js")
-    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js")
-
+    
     block content
     
     footer(style="background-color:#000000; color:#ffffff")
