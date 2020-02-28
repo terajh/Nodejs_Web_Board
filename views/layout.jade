@@ -10,11 +10,7 @@ html(lang="en")
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
-    script(type='text/javascript' src="/socket.io/socket.io.js")
-    script(src="http://code.jquery.com/jquery-latest.min.js")
-    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js")
-    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js")
-    //- script(type='text/javascript' src="/javascripts/script.js")
+       //- script(type='text/javascript' src="/javascripts/script.js")
   body
     nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
       a(class="navbar-brand" href="/"): h3 TERAJOO
@@ -121,67 +117,71 @@ html(lang="en")
             input(type="hidden" id="nickname" value="#{AuthStatusUI}")
     
 
+    script(type='text/javascript' src="/socket.io/socket.io.js")
+    script(src="http://code.jquery.com/jquery-latest.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js")
 
-  script(type='text/javascript').
-    $(()=>{
-      const socket = io('');
-      var roomId=1;
-      var myId=$('#nickname').val();
-      console.log(myId);
+    script(type='text/javascript').
+      $(()=>{
+        const socket = io('');
+        var roomId=1;
+        var myId=$('#nickname').val();
+        console.log(myId);
 
-      //- 클릭시 이벤트기반출력
-      $('#roomSelect').on('click','div', (event)=>{
-        var click_roomId = $(event.target).data('id');
-        if(roomId!=click_roomId){
-          roomId=click_roomId;
-        }
-        console.log($(event.target).data('id'));
-        $(event.target).parent().children().removeClass("active");
-        $(event.target).addClass("active");
+        //- 클릭시 이벤트기반출력
+        $('#roomSelect').on('click','div', (event)=>{
+          var click_roomId = $(event.target).data('id');
+          if(roomId!=click_roomId){
+            roomId=click_roomId;
+          }
+          console.log($(event.target).data('id'));
+          $(event.target).parent().children().removeClass("active");
+          $(event.target).addClass("active");
 
-        $('#chatHeader').html(`${$(event.target).html()}`);
-        socket.emit('join room', {
-          roomId:roomId,
-          name:myId
+          $('#chatHeader').html(`${$(event.target).html()}`);
+          socket.emit('join room', {
+            roomId:roomId,
+            name:myId
+          });
+        });
+        
+        $('#chatForm').submit(()=>{
+            var option = {
+                msg:$('#message').val(),
+                name:$('#nickname').val()
+            };
+            socket.emit('chat message',option);
+            $('#message').val('');
+            return false;
+        });
+        socket.on('chat message',(option)=>{
+          //- alert('joined room');
+          var name = option.name+' : ';
+          $('#chatLog').append(`<div class="myMsg msgEl"><span>${name}</span><span class="msg">${option.msg}</span></div>`)
+          //- $('#chatLog').append($('<br>'));
+          $('#chatLog').scroll()[0].scrollTop=$('#chatLog').scroll()[0].scrollHeight;
+        });
+
+        socket.on('update user', function (userlist) {
+            let html = "";
+            for(var key in userlist){
+                if (key === myId) {
+                    html += `<div class="memberEl">${key} (me)</div>`
+                } else {
+                    html += `<div class="memberEl">${key}</div>`
+                }
+            }
+            $('#memberSelect').html(html);
+            socket.emit('joined room',myId);
+        });
+
+        socket.on('lefted room', function (data) {
+            $('#chatLog').append(`<div class="notice"><strong>${data.name}</strong> lefted the room${data.roomId-1}</div>`)
+        });
+        socket.on('joined room', function (data) {
+          $('#chatLog').html('');
+          $('#chatLog').append(`<div class="notice"><strong>${data.name}</strong> joined the room[${data.roomId-1}]</div>`)
         });
       });
-      
-      $('#chatForm').submit(()=>{
-          var option = {
-              msg:$('#message').val(),
-              name:$('#nickname').val()
-          };
-          socket.emit('chat message',option);
-          $('#message').val('');
-          return false;
-      });
-      socket.on('chat message',(option)=>{
-        //- alert('joined room');
-        var name = option.name+' : ';
-        $('#chatLog').append(`<div class="myMsg msgEl"><span>${name}</span><span class="msg">${option.msg}</span></div>`)
-        //- $('#chatLog').append($('<br>'));
-        $('#chatLog').scroll()[0].scrollTop=$('#chatLog').scroll()[0].scrollHeight;
-      });
-
-      socket.on('update user', function (userlist) {
-          let html = "";
-          for(var key in userlist){
-              if (key === myId) {
-                  html += `<div class="memberEl">${key} (me)</div>`
-              } else {
-                  html += `<div class="memberEl">${key}</div>`
-              }
-          }
-          $('#memberSelect').html(html);
-          socket.emit('joined room',myId);
-      });
-
-      socket.on('lefted room', function (data) {
-          $('#chatLog').append(`<div class="notice"><strong>${data.name}</strong> lefted the room${data.roomId-1}</div>`)
-      });
-      socket.on('joined room', function (data) {
-         $('#chatLog').html('');
-         $('#chatLog').append(`<div class="notice"><strong>${data.name}</strong> joined the room[${data.roomId-1}]</div>`)
-      });
-    });
-        
+          
