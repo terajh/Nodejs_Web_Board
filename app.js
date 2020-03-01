@@ -83,6 +83,7 @@ var indexRouter = require('./routes/index.js');
 var usersRouter = require('./routes/users.js');
 var authRouter = require('./routes/auth.js')(passport);
 var chatRouter = require('./routes/chat.js');
+var webtoonRouter = require('./routes/webtoon.js');
 
 
 // app.use('/chat',chatRouter);
@@ -90,6 +91,7 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 app.use('/chat',chatRouter);
+app.use('/webtoon',webtoonRouter);
 
 
 

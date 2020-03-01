@@ -1,0 +1,40 @@
+extends layout
+
+
+block content
+  div(class="container")
+    table(class="table")
+      thead 
+        tr
+          th Title
+          th Episode
+      tbody
+        -for(var i=0;i<title.Lastepisode;i++)
+          tr
+            td #{title.title}
+            td: a(href='/webtoon/#{title.title}/#{i+1}') #{i+1}화
+  hr  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+      
+

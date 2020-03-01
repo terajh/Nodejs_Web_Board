@@ -5,15 +5,11 @@ html(lang="en")
     meta(charset="utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     
-    link(rel='stylesheet', href='/stylesheets/chatstyle.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js")
-    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js")
-
+    link(rel='stylesheet', href='/stylesheets/chatstyle.css' type="text/css")
+    link(rel='stylesheet', href='/stylesheets/style.css' type="text/css")
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css' type="text/css")
     title= 'TERAJOO\'s blog'
-    //- link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
-    //- script(type='text/javascript' src="/javascripts/script.js")
+    
   body
     nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
       a(class="navbar-brand" href="/"): h3 TERAJOO
@@ -37,6 +33,8 @@ html(lang="en")
             a(class="nav-link" href="/users/board") UserBoard
           li(class="nav-item")
             a(class="nav-link" href="/chat") Chat
+          li(class="nav-item")
+            a(class="nav-link" href="/webtoon") webtoon
       div(class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarNavAltMarkup")
         ul(class="navbar-nav ml-auto")
           li(class="nav-item dropdown")
@@ -184,7 +182,7 @@ html(lang="en")
             $('#chatLog').append(`<div class="notice"><strong>${data.name}</strong> lefted the room${data.roomId-1}</div>`)
         });
         socket.on('joined room', function (data) {
-          $('#chatLog').html('');
+          //- $('#chatLog').html('');
           $('#chatLog').append(`<div class="notice"><strong>${data.name}</strong> joined the room[${data.roomId-1}]</div>`)
         });
       });

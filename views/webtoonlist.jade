@@ -1,0 +1,38 @@
+extends layout
+
+
+block content
+  div(class="container")
+    table(class="table")
+      thead 
+        tr
+          th id
+          th Title
+      tbody
+        -for(var i=0;i<title.length;i++)
+          tr
+            td #{i+1}
+            td: a(href='../webtoon/#{title[i].title}') #{title[i].title}
+  hr  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+      
+

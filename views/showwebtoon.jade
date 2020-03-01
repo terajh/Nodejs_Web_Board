@@ -1,0 +1,25 @@
+extends layout
+
+block content
+
+  div(class="container")
+    h4(style="text-align:center; text:bord;") [#{title}화] page
+    hr
+    -for(var i=0;i<src.length;i++)
+        //- span #{src[i].src}
+        div(style="text-align:center;")
+            img(src="#{src[i].src}")
+    
+    hr
+    
+    table(class="table")
+      thead 
+        tr
+          th title
+          th Episode
+      tbody
+        -for(var i=1;i<=src[0].Lastepisode;i++)
+          tr
+            td #{title}
+            td: a(href='/webtoon/#{title}/#{i}') #{i}화
+    hr

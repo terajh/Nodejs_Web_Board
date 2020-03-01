@@ -1,0 +1,15 @@
+{
+    "webtoonsList":["chungcoonmother","KnightRun","TheBoxer"],
+    "chungcoonmother": {
+        "episode":13,
+        "titleId":737018
+    },
+    "KnightRun":{
+        "episode":508,
+        "titleId":64997
+    },
+    "TheBoxer":{
+        "episode":15,
+        "titleId":736989
+    }
+}
