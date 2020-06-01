@@ -10,5 +10,5 @@
 
 ### GOALS
 
-- designed used by Bootstrap open soursces : X
-- crolling functions by python modules : X
+- designed used by Bootstrap open soursces 
+- crolling functions by python modules 
