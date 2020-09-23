@@ -1,3 +1,5 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/terajh/Nodejs_Web_Board)](https://hits.seeyoufarm.com) 
+
 ## BOARD v1.0.0
 
 ### Functions
